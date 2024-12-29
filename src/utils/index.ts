@@ -10,8 +10,6 @@ interface IFormUrlQueryProps {
 export function formUrlQuery({ params, key, value, keysToRemove }: IFormUrlQueryProps) {
   const currentUrl = qs.parse(params);
 
-  console.log('currentUrl', currentUrl);
-
   if (keysToRemove) {
     keysToRemove.forEach((keyToRemove) => {
       delete currentUrl[keyToRemove];

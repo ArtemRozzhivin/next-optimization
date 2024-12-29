@@ -5,7 +5,9 @@ import { Button } from '@/components/ui/button';
 import { getResources } from '@/sanity/actions';
 import Image from 'next/image';
 
-const Home = async () => {
+const Home = ({ searchParams }: { searchParams: any }) => {
+  console.log('searchParams', searchParams);
+
   return (
     <main className='flex-center paddings mx-auto w-full max-w-screen-2xl flex-col'>
       <section className='nav-padding w-full'>

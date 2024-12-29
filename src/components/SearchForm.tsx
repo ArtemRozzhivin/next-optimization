@@ -14,15 +14,22 @@ const SearchForm = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    let newUrl = '';
+
     if (debouncedSearch) {
-      const newUrl = formUrlQuery({
+      newUrl = formUrlQuery({
         params: searchParams.toString(),
         key: 'search',
         value: debouncedSearch,
       });
-
-      router.push(newUrl);
+    } else {
+      newUrl = formUrlQuery({
+        params: searchParams.toString(),
+        keysToRemove: ['search'],
+      });
     }
+
+    router.push(newUrl);
   }, [debouncedSearch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +50,8 @@ const SearchForm = () => {
           className='base-regular h-fit border-0 bg-black-400 pr-4 py-3 md:py-6 pl-20 md:pr-8 text-white-800 !ring-0 !ring-offset-0 placeholder:text-white-800'
           type='text'
           placeholder='Search'
-          value={search} // відображаємо значення з інпуту
-          onChange={handleSearch} // оновлення значення інпуту
+          value={search}
+          onChange={handleSearch}
         />
       </label>
     </form>

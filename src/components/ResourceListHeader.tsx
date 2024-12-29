@@ -1,19 +1,21 @@
+'use client';
+
 interface IResourceListHeaderProps {
-  query: string;
+  search: string;
   category: string;
 }
 
-const ResourceListHeader = ({ query, category }: IResourceListHeaderProps) => {
-  if (query && category) {
+const ResourceListHeader = ({ search, category }: IResourceListHeaderProps) => {
+  if (search && category) {
     return (
       <h1 className='heading3 self-start text-white-800'>
-        Search results for "{query}" in <span className='capitalize'>{category}</span>
+        Search results for "{search}" in <span className='capitalize'>{category}</span>
       </h1>
     );
   }
 
-  if (query) {
-    return <h1 className='heading3 self-start text-white-800'>Search results for "{query}"</h1>;
+  if (search) {
+    return <h1 className='heading3 self-start text-white-800'>Search results for "{search}"</h1>;
   }
 
   if (category) {
@@ -24,7 +26,7 @@ const ResourceListHeader = ({ query, category }: IResourceListHeaderProps) => {
     );
   }
 
-  return <h1 className='heading3 self-start text-white-800'>No Results</h1>;
+  return <h1 className='heading3 self-start text-white-800'>Courses</h1>;
 };
 
 export default ResourceListHeader;

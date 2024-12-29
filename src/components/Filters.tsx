@@ -12,8 +12,6 @@ const Filters = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  console.log('searchParams', searchParams.toString());
-
   const handleFilter = (link: string) => {
     let newUrl = '';
 
