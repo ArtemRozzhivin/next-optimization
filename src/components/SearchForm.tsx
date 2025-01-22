@@ -29,7 +29,7 @@ const SearchForm = () => {
       });
     }
 
-    router.push(newUrl);
+    router.push(newUrl, { scroll: false });
   }, [debouncedSearch]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

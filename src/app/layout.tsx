@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import Providers from './providers';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 export const metadata: Metadata = {
   title: 'NextOptimization',
@@ -14,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='bg-black-100 min-h-screen font-poppins text-white-800'>{children}</body>
+      <body className='bg-black-100 min-h-screen font-poppins text-white-800'>
+        <Providers>
+          {children}
+          <ReactQueryDevtools initialIsOpen={true} />
+        </Providers>
+      </body>
     </html>
   );
 }

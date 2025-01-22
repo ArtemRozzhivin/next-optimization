@@ -17,13 +17,15 @@ const ResourceCard = ({ id, title, image, downloadNumber, downloadLink }: IResou
       <Link href={downloadLink} target='_blank'>
         <CardHeader className='flex-center flex-col gap-2.5 !p-0'>
           <div className='h-fit w-full'>
-            <Image
-              src={image}
-              className='h-full rounded-md object-cover'
-              width={384}
-              height={440}
-              alt={title}
-            />
+            {image && (
+              <Image
+                src={image}
+                className='h-full rounded-md object-cover'
+                width={384}
+                height={440}
+                alt={title}
+              />
+            )}
           </div>
           <CardTitle className='text-white paragraph-semibold line-clamp-1 w-full text-left'>
             {title}

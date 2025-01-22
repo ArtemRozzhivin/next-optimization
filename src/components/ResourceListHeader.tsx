@@ -1,11 +1,10 @@
-'use client';
-
 interface IResourceListHeaderProps {
-  search: string;
-  category: string;
+  title: string;
+  search?: string;
+  category?: string;
 }
 
-const ResourceListHeader = ({ search, category }: IResourceListHeaderProps) => {
+const ResourceListHeader = ({ search, category, title }: IResourceListHeaderProps) => {
   if (search && category) {
     return (
       <h1 className='heading3 self-start text-white-800'>
@@ -26,7 +25,7 @@ const ResourceListHeader = ({ search, category }: IResourceListHeaderProps) => {
     );
   }
 
-  return <h1 className='heading3 self-start text-white-800'>Courses</h1>;
+  return <h1 className='heading3 self-start text-white-800'>{title}</h1>;
 };
 
 export default ResourceListHeader;
