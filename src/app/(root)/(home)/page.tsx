@@ -10,7 +10,6 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query';
-import Image from 'next/image';
 
 const Home = async ({ searchParams }: { searchParams: any }) => {
   const queryClient = new QueryClient();
