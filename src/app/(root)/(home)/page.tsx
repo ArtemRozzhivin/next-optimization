@@ -16,6 +16,8 @@ const Home = async ({ searchParams }: { searchParams: any }) => {
   const isSearchingResources = searchParams?.search || searchParams?.category;
   const resourcePlaylists = await getResourcesPlaylists();
 
+  console.log('resourcePlaylists', resourcePlaylists);
+
   await queryClient.prefetchQuery({
     queryKey: ['resources', searchParams?.search, searchParams?.category],
     queryFn: () =>

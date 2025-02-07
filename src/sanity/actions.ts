@@ -46,6 +46,6 @@ export const getResourcesPlaylists = async () => {
     return resource;
   } catch (error) {
     console.log(error);
-    return null;
+    return [];
   }
 };
