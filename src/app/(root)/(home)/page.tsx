@@ -2,27 +2,29 @@ import Filters from '@/components/Filters';
 import ResourceList from '@/components/ResourceList';
 import ResourcePlaylist from '@/components/ResourcePlaylist';
 import SearchForm from '@/components/SearchForm';
-import { Button } from '@/components/ui/button';
-import { getResources, getResourcesPlaylist } from '@/sanity/actions';
-import { dehydrate, HydrationBoundary, QueryClient, useQuery } from '@tanstack/react-query';
+import { getResources, getResourcesPlaylists } from '@/sanity/actions';
+import { Playlist } from '@/types/resources';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+  useQuery,
+} from '@tanstack/react-query';
 import Image from 'next/image';
 
 const Home = async ({ searchParams }: { searchParams: any }) => {
   const queryClient = new QueryClient();
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: ['resources'],
-  //   queryFn: () =>
-  //     getResources({
-  //       query: searchParams?.search || '',
-  //       category: searchParams?.category || '',
-  //       page: '1',
-  //     }),
-  // });
+  const isSearchingResources = searchParams?.search || searchParams?.category;
+  const resourcePlaylists = await getResourcesPlaylists();
 
   await queryClient.prefetchQuery({
-    queryKey: ['recourcePlaylist'],
-    queryFn: () => getResourcesPlaylist(),
+    queryKey: ['resources', searchParams?.search, searchParams?.category],
+    queryFn: () =>
+      getResources({
+        query: searchParams?.search || '',
+        category: searchParams?.category || '',
+        page: '1',
+      }),
   });
 
   return (
@@ -41,8 +43,17 @@ const Home = async ({ searchParams }: { searchParams: any }) => {
           <Filters />
         </section>
 
-        {(searchParams?.search || searchParams?.category) && <ResourceList />}
-        <ResourcePlaylist />
+        {isSearchingResources && <ResourceList />}
+
+        {!isSearchingResources && (
+          <ul>
+            {resourcePlaylists.map((resourcePlaylist: Playlist) => (
+              <li>
+                <ResourcePlaylist playlist={resourcePlaylist} />
+              </li>
+            ))}
+          </ul>
+        )}
       </main>
     </HydrationBoundary>
   );

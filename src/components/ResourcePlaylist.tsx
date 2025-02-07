@@ -4,33 +4,23 @@ import React, { useEffect } from 'react';
 import ResourceListHeader from './ResourceListHeader';
 import ResourceCard from './ResourceCard';
 import { Button } from '@/components/ui/button';
-import { getResources, getResourcesPlaylist } from '@/sanity/actions';
+import { getResources } from '@/sanity/actions';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { Playlist } from '@/types/resources';
 
-const ResourcePlaylist = () => {
+interface IResourcePlaylistProps {
+  playlist: Playlist;
+}
+
+const ResourcePlaylist = ({ playlist }: IResourcePlaylistProps) => {
   const params = useSearchParams();
-
-  const {
-    data: playlist,
-    isLoading,
-    isFetched,
-  } = useQuery<Playlist | null>({
-    queryKey: ['recourcePlaylist'],
-    queryFn: () => getResourcesPlaylist(),
-  });
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   if (!playlist) {
     return <p>No resources found</p>;
   }
 
-  console.log('Playlist', playlist);
   return (
     <section className='flex-center mt-6 w-full flex-col sm:mt-20'>
       <ResourceListHeader title={playlist.title} />

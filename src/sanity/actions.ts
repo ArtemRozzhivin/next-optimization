@@ -3,7 +3,9 @@ import { GetResourcesParamsProps, Resource } from './types';
 import { buildQuery } from './utils';
 import { client, editorClient } from './lib/client';
 
-export const getResources = async (params: GetResourcesParamsProps): Promise<Resource[]> => {
+export const getResources = async (
+  params: GetResourcesParamsProps,
+): Promise<Resource[]> => {
   const { category, page, query } = params;
 
   try {
@@ -26,34 +28,7 @@ export const getResources = async (params: GetResourcesParamsProps): Promise<Res
   }
 };
 
-// export const getResourcesPlaylist = async () => {
-//   try {
-//     const resource = await client.fetch(
-//       groq`*[_type == "resource-list"]{
-//         _id,
-//         title,
-//         resources[0...6]->{
-//           _id,
-//           title,
-//           category,
-//           downloadLink,
-//           views,
-//           "image": poster.asset->url,
-//           slug,
-//           }
-//         }`,
-//     );
-
-//     console.log('Resources', resource);
-
-//     return resource;
-//   } catch (error) {
-//     console.log(error);
-//     return [];
-//   }
-// };
-
-export const getResourcesPlaylist = async () => {
+export const getResourcesPlaylists = async () => {
   try {
     const resource = await client.fetch(groq`*[_type == "resource-list"]{
       _id,
@@ -68,7 +43,7 @@ export const getResourcesPlaylist = async () => {
       }
     }`);
 
-    return resource[0];
+    return resource;
   } catch (error) {
     console.log(error);
     return null;

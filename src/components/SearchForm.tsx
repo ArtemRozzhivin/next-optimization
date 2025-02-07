@@ -36,6 +36,9 @@ const SearchForm = () => {
     setSearch(e.target.value);
   };
 
+  console.log('debauncedSearch', debouncedSearch);
+  console.log('search', search);
+
   return (
     <form className='flex-center mx-auto mt-10 w-full sm:-mt-10 sm:px-5'>
       <label className='flex-center relative w-full max-w-3xl'>

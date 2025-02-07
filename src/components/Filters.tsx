@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formUrlQuery } from '@/utils';
@@ -8,7 +8,7 @@ import { formUrlQuery } from '@/utils';
 const links = ['All', 'NextJS', 'Frontend', 'Backend', 'Fullstack'];
 
 const Filters = () => {
-  const [active, setActive] = React.useState('All');
+  const [active, setActive] = useState('');
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -45,7 +45,8 @@ const Filters = () => {
               className={cn(
                 'whitespace-normal rounded-lg px-8 py-2.5 capitalize',
                 active === link && 'gradient_blue-purple',
-              )}>
+              )}
+            >
               {link}
             </button>
           </li>
